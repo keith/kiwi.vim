@@ -24,13 +24,16 @@ highlight default link kiwiGroups Function
 
 " Requires matchgroup=noop for correct start/end/folding
 "  this is caused by something in the imported objc.vim
-syntax region kiwiBlock matchgroup=noop start=/\v\(\^(AsyncBlock)?\s*\{/ end=/\v\}\);/ containedin=ALLBUT,kiwiCommentBlock fold contains=ALLBUT,kiwiSpec
-syntax region kiwiBlock matchgroup=noop start=/\v\(\@".*",\s\^(AsyncBlock)?\s*\{/ end=/\v\}\);/ containedin=ALLBUT,kiwiCommentBlock fold contains=ALLBUT,kiwiSpec
+syntax region kiwiBlock matchgroup=noop start=/\v\(\^\{/ end=/\v\}\);/ containedin=ALLBUT,kiwiCommentBlock fold contains=ALLBUT,kiwiSpec
+syntax region kiwiBlock matchgroup=noop start=/\v\((\@".*"|\w*),\s*\^\{/ end=/\v\}\);/ containedin=ALLBUT,kiwiCommentBlock fold contains=ALLBUT,kiwiSpec
+
+" syntax region kiwiResultBlock start=/\v[[theBlock.*/ end=/\v.*];/ containedin=ALLBUT,kiwiCommentBlock fold contains=ALLBUT,kiwiSpec
+" highlight default link kiwiResultBlock TODO
 
 
 " Pending specs, make the entire nested block a comment
 syntax keyword kiwiPending pending nextgroup=kiwiCommentBlock containedin=ALLBUT,objcString
-syntax region kiwiCommentBlock matchgroup=kiwiCommentBlock start=/\v\(\@".*",\s\^(AsyncBlock)?\s*\{/ end=/\v\}\);/ containedin=ALL fold contains=NONE
+syntax region kiwiCommentBlock matchgroup=kiwiCommentBlock start=/\v\(\@".*",\s*\^\{/ end=/\v\}\);/ containedin=ALL fold contains=NONE
 
 highlight default link kiwiPending Comment
 highlight default link kiwiCommentBlock Comment
